@@ -1,0 +1,74 @@
+problem:
+  name: "btc_demo"
+  dimension: 5
+  bounds: [-1.0, 1.0]
+  maximize: false
+  multiobj: true
+
+  # NOVOS CAMPOS para normalizar objetivos
+  normalize_objs: true    # se 'true', normaliza os objetivos
+  norm_factor: 100.0      # fator de multiplicação (ou divisão) para normalizar
+
+evolution:
+  population_size: 50
+  generations: 30
+  selection:
+    type: "tournament"
+    tournament_size: 3
+  crossover:
+    rate: 1
+    type: "uniform"
+  mutation:
+    adaptation: false
+    initial_rate: 0.2
+    tau: 0.1
+    min_rate: 0.001
+    max_rate: 0.5
+  elitism: 2
+
+surrogate:
+  use: true
+  multi_output: true
+  ensemble_size: 3
+  dynamic_fallback: true
+  hidden_layers: [64, 32]
+  activation: "relu"
+  pretrain_csv: "btc_formatted.csv"
+
+  # Ajustes p/ acelerar o treino
+  learning_rate: 0.01
+  batch_size: 32
+  epochs: 20                  # diminuído de 30 para 20
+  early_stopping_patience: 3  # diminuído de 5 para 3
+
+  fallback_error_thresh: 5.0  # antes 10.0; reduzido para ficar mais rigoroso
+  confidence_threshold: 0.5
+  convert_coreml: true
+  use_gp: false
+
+# Ajustado para re-treinar a cada 2 gerações
+retrain_interval: 2
+start_generation: 1
+real_phase_generations: 0
+
+restart:
+  enabled: false
+  stagnation_generations: 8
+  restart_fraction: 0.4
+  reuse_best: true
+
+parallel:
+  evaluate_workers: 4
+
+device:
+  use_mps: true
+
+ui:
+  streamlit: true
+
+hypervolume_ref: [100.0, 100.0]
+
+# Sem local search extra
+local_search_top_k: 0
+local_search_steps: 0
+local_search_step_size: 0.5
