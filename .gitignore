@@ -1,8 +1,2 @@
-# Ignora a pasta do ambiente virtual
 venv/
-
-# Ignora todos os arquivos dentro de BTC Price Data
-BTC Price Data/
-
-# Ignora o arquivo btc_formatted.csv
 btc_formatted.csv
