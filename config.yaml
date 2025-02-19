@@ -47,7 +47,7 @@ surrogate:
   use_gp: false
 
 # Ajustado para re-treinar a cada 2 gerações
-retrain_interval: 2
+retrain_interval: 5
 start_generation: 1
 real_phase_generations: 0
 
